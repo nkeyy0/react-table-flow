@@ -4,7 +4,7 @@ import type { AccountingTableRow, AccountingTableState } from './components/Acco
 import { useState } from 'react';
 import 'antd/dist/reset.css';
 
-import { getAccountingRecordsFromStorage, setTableRowsToStorage } from './commands/save-table-record-to-storage';
+import { getAccountingRecordsFromStorage, setTableRowsToStorage } from './commands/storage.commands';
 import { TableActionColumn } from './components/AccountingTable/components/TableActionsDropdown';
 import dayjs from 'dayjs';
 import { AccountingTableHelper } from './helpers/accounting-table.helper';
