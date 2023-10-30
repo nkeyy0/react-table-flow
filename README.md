@@ -1,5 +1,7 @@
 # React table flow
 
+Base table built with React and antd libraries.
+
 ## Before start
 
 First of all run:
@@ -17,6 +19,8 @@ npm run dev
 Server is hosted on `http://localhost:5173`
 
 ## Running tests
+
+I'd like to add unit tests, but unfortunately I don't have enough time to do that. So it might be a good task for the future :)
 
 ```
 npm run test:unit
