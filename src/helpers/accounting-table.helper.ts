@@ -2,6 +2,7 @@ import dayjs from 'dayjs';
 import { AccountingTableRow, AccountingTableState } from '../components/AccountingTable/accounting-table.interface';
 import { TableCellType } from '../interfaces/table.interface';
 import { DEFAULT_DATE_FORMAT } from '../constants/date.constants';
+import { v4 } from 'uuid';
 
 export class AccountingTableHelper {
   static getCellType(tableState: AccountingTableState, record: AccountingTableRow): TableCellType {
@@ -45,5 +46,23 @@ export class AccountingTableHelper {
     return dayjs(row1.date, DEFAULT_DATE_FORMAT).isBefore(dayjs(row2.date, DEFAULT_DATE_FORMAT)) ? -1 : 1;
   }
 
-  static getSummary() {}
+  static calculateTotalAmount(rows: readonly AccountingTableRow[]): number {
+    return rows.reduce((sum, row) => {
+      if (row.type === 'income') {
+        return sum + row.amount;
+      } else {
+        return sum - row.amount;
+      }
+    }, 0);
+  }
+
+  static getTableInitialRow(): AccountingTableRow {
+    return {
+      key: v4(),
+      date: '',
+      amount: 0,
+      type: 'expense',
+      note: '',
+    };
+  }
 }

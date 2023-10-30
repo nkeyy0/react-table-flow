@@ -115,18 +115,11 @@ const AccountingTable = ({
       components={{ body: { cell: TableCell } }}
       dataSource={rows}
       summary={(rows) => {
-        const total = rows.reduce((sum, row) => {
-          if (row.type === 'income') {
-            return sum + row.amount;
-          } else {
-            return sum - row.amount;
-          }
-        }, 0);
         return (
           <Table.Summary fixed>
             <Table.Summary.Row>
               <Table.Summary.Cell index={0}>Total</Table.Summary.Cell>
-              <Table.Summary.Cell index={1}>{total}</Table.Summary.Cell>
+              <Table.Summary.Cell index={1}>{AccountingTableHelper.calculateTotalAmount(rows)}</Table.Summary.Cell>
             </Table.Summary.Row>
           </Table.Summary>
         );

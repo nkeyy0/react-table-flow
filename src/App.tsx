@@ -5,19 +5,10 @@ import { useState } from 'react';
 import 'antd/dist/reset.css';
 
 import { getAccountingRecordsFromStorage, setTableRowsToStorage } from './commands/save-table-record-to-storage';
-import { v4 } from 'uuid';
 import { TableActionColumn } from './components/AccountingTable/components/TableActionsDropdown';
 import dayjs from 'dayjs';
-
-function getInitialRow(): AccountingTableRow {
-  return {
-    key: v4(),
-    date: '',
-    amount: 0,
-    type: 'expense',
-    note: '',
-  };
-}
+import { AccountingTableHelper } from './helpers/accounting-table.helper';
+import { DEFAULT_DATE_FORMAT } from './constants/date.constants';
 
 interface FormValues {
   date: dayjs.Dayjs;
@@ -56,7 +47,7 @@ function App() {
   }
 
   function onAddButtonClick() {
-    const row = getInitialRow();
+    const row = AccountingTableHelper.getTableInitialRow();
     setRows([row, ...rows]);
     form.setFieldsValue({
       date: dayjs(),
@@ -73,7 +64,7 @@ function App() {
       const row = await form.validateFields();
       const newRows = rows.map((tableRow) => {
         if (tableRow.key === currentRowKey) {
-          return { ...row, key: tableRow.key, date: row.date.format('DD/MM/YYYY') };
+          return { ...row, key: tableRow.key, date: row.date.format(DEFAULT_DATE_FORMAT) };
         }
 
         return { ...tableRow };
