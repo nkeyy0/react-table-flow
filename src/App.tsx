@@ -9,6 +9,7 @@ import { TableActionColumn } from './components/AccountingTable/components/Table
 import dayjs from 'dayjs';
 import { AccountingTableHelper } from './helpers/accounting-table.helper';
 import { DEFAULT_DATE_FORMAT } from './constants/date.constants';
+import { CheckOutlined, CloseCircleOutlined } from '@ant-design/icons';
 
 interface FormValues {
   date: dayjs.Dayjs;
@@ -99,9 +100,9 @@ function App() {
           actionContent={(row) => {
             if ((tableState.type === 'new' || tableState.type === 'edit') && row.key === currentRowKey) {
               return (
-                <div>
-                  <Button onClick={onCancel}>✕</Button>
-                  <Button onClick={onSave}>✔</Button>
+                <div style={{ display: 'flex', gap: '4px' }}>
+                  <Button shape="circle" icon={<CloseCircleOutlined />} onClick={onCancel} />
+                  <Button shape="circle" icon={<CheckOutlined />} onClick={onSave} />
                 </div>
               );
             }

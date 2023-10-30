@@ -41,7 +41,7 @@ const AccountingTable = ({
           type: AccountingTableHelper.getCellType(tableState, record),
         };
       },
-      sorter: (row1, row2) => AccountingTableHelper.dateSorter(row1, row2),
+      sorter: tableState.type !== 'view' ? undefined : (row1, row2) => AccountingTableHelper.dateSorter(row1, row2),
     },
     {
       title: 'Amount',
@@ -64,7 +64,7 @@ const AccountingTable = ({
           type: AccountingTableHelper.getCellType(tableState, record),
         };
       },
-      sorter: (row1, row2) => AccountingTableHelper.amountSorter(row1, row2),
+      sorter: tableState.type !== 'view' ? undefined : (row1, row2) => AccountingTableHelper.amountSorter(row1, row2),
     },
     {
       title: 'Type',
